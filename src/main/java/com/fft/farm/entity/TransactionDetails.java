@@ -3,6 +3,7 @@ package com.fft.farm.entity;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Entity
 @Table(name = "transaction_details")
@@ -10,9 +11,13 @@ import java.util.Date;
 public class TransactionDetails {
     private Integer transactionDetailsSeq;
     //farm details
+    @NotNull
     private Integer farmSeq;
+    @NotNull
     private Integer foodSeq;
+    @NotNull
     private Integer fertilizerSeq;
+    @NotNull
     private Integer pesticideSeq;
     private String note;
     private Date qrGenerateDate;
