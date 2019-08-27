@@ -6,16 +6,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "farm")
 @EntityListeners(AuditingEntityListener.class)
-public class Farm {
+public class Farm extends SharedModel{
 
     private Integer farmSeq;
     private String farmName;
     private String address;
     private String contactNo;
-    private Integer fertilizerSeq;
-    private Integer pesticideSeq;
-    private Fertilizer fertilizer;
-    private  Pesticide pesticide;
+    private String fertilizerName;
+    private String pesticideName;
+    private Integer foodSeq;
+    private Food food;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,41 +54,79 @@ public class Farm {
     public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
     }
+
     @Basic
-    @Column(name = "fertilizer_seq")
-    public Integer getFertilizerSeq() {
-        return fertilizerSeq;
+    @Column(name = "fertilizer_name")
+    public String getFertilizerName() {
+        return fertilizerName;
     }
 
-    public void setFertilizerSeq(Integer fertilizerSeq) {
-        this.fertilizerSeq = fertilizerSeq;
+    public void setFertilizerName(String fertilizerName) {
+        this.fertilizerName = fertilizerName;
     }
     @Basic
-    @Column(name = "pesticide_seq")
-    public Integer getPesticideSeq() {
-        return pesticideSeq;
+    @Column(name = "pesticide_name")
+    public String getPesticideName() {
+        return pesticideName;
     }
 
-    public void setPesticideSeq(Integer pesticideSeq) {
-        this.pesticideSeq = pesticideSeq;
+    public void setPesticideName(String pesticideName) {
+        this.pesticideName = pesticideName;
+    }
+    @Basic
+    @Column(name = "food_seq")
+    public Integer getFoodSeq() {
+        return foodSeq;
+    }
+
+    public void setFoodSeq(Integer foodSeq) {
+        this.foodSeq = foodSeq;
     }
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fertilizer_seq", nullable = false, insertable = false, updatable = false)
-    public Fertilizer getFertilizer() {
-        return fertilizer;
+    @JoinColumn(name = "food_seq",nullable = false, insertable = false, updatable = false)
+    public Food getFood() {
+        return food;
     }
 
-    public void setFertilizer(Fertilizer fertilizer) {
-        this.fertilizer = fertilizer;
+    public void setFood(Food food) {
+        this.food = food;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pesticide_seq",nullable = false, insertable = false, updatable = false)
-    public Pesticide getPesticide() {
-        return pesticide;
-    }
+    //    @Basic
+//    @Column(name = "fertilizer_seq")
+//    public Integer getFertilizerSeq() {
+//        return fertilizerSeq;
+//    }
+//
+//    public void setFertilizerSeq(Integer fertilizerSeq) {
+//        this.fertilizerSeq = fertilizerSeq;
+//    }
+//    @Basic
+//    @Column(name = "pesticide_seq")
+//    public Integer getPesticideSeq() {
+//        return pesticideSeq;
+//    }
 
-    public void setPesticide(Pesticide pesticide) {
-        this.pesticide = pesticide;
-    }
+//    public void setPesticideSeq(Integer pesticideSeq) {
+//        this.pesticideSeq = pesticideSeq;
+//    }
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "fertilizer_seq", nullable = false, insertable = false, updatable = false)
+//    public Fertilizer getFertilizer() {
+//        return fertilizer;
+//    }
+//
+//    public void setFertilizer(Fertilizer fertilizer) {
+//        this.fertilizer = fertilizer;
+//    }
+//
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "pesticide_seq",nullable = false, insertable = false, updatable = false)
+//    public Pesticide getPesticide() {
+//        return pesticide;
+//    }
+//
+//    public void setPesticide(Pesticide pesticide) {
+//        this.pesticide = pesticide;
+//    }
 }
