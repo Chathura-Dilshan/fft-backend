@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,6 +22,7 @@ public class User extends SharedModel {
     private Set<Role> roles;
     private String securityAnswer;
     private String userType;
+    private List<Integer> rolesList;
 
     public User() {
     }
@@ -129,5 +131,14 @@ public class User extends SharedModel {
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    @Transient
+    public List<Integer> getRolesList() {
+        return rolesList;
+    }
+
+    public void setRolesList(List<Integer> rolesList) {
+        this.rolesList = rolesList;
     }
 }

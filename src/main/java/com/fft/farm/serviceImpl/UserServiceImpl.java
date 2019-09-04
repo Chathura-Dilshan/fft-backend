@@ -52,17 +52,23 @@ public class UserServiceImpl implements UserService {
                 user.setStatus(MasterDataStatus.APPROVED.getStatusSeq());
                 user.setUserSeq(null);
                 Set<Role> rolesSet = new HashSet<>();
+                Optional<List<Role>> existRoles;
                 if (user.getUserType().equals("GUEST_USER")) {
+                    user.setUserType("GUEST_USER");
                     List<String> roles = new ArrayList<>();
                     roles.add("login");
                     roles.add("dashboard");
                     roles.add("bodyMassIndex");
-                    Optional<List<Role>> existRoles = this.roleRepository.findByRoleNameIn(roles);
-
+                    existRoles = this.roleRepository.findByRoleNameIn(roles);
                     existRoles.ifPresent(rolesSet::addAll);
 
+                } else if (user.getUserType().equals("SYSTEM_USER")) {
+                    user.setUserType("SYSTEM_USER");
+                    existRoles = this.roleRepository.findByRoleSeqIn(user.getRolesList());
+                    existRoles.ifPresent(rolesSet::addAll);
                 }
                 user.setRoles(rolesSet);
+
 
                 this.userRepository.save(user);
                 responseEntity = new ResponseEntity<>(user, HttpStatus.CREATED);

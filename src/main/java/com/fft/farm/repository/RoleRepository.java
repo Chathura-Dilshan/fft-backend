@@ -10,5 +10,10 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
     Optional<List<Role>> findByRoleNameIn(List<String> roleNames);
 
 
+    Optional<Role> findByRoleName(String roleName);
+
+    List<Role> findByStatus(Integer statusSeq);
+
+    Optional<List<Role>> findByRoleSeqIn(List<Integer> rolesList);
 }
 
