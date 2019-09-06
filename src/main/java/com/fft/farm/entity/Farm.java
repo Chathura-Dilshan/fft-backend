@@ -16,6 +16,8 @@ public class Farm extends SharedModel{
     private String pesticideName;
     private Integer foodSeq;
     private Food food;
+    private User user;
+    private Integer userSeq;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -90,6 +92,25 @@ public class Farm extends SharedModel{
 
     public void setFood(Food food) {
         this.food = food;
+    }
+
+    @OneToOne
+    @JoinColumn(name = "user_seq",nullable = false, insertable = false, updatable = false)
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    @Basic
+    @Column(name = "user_seq")
+    public Integer getUserSeq() {
+        return userSeq;
+    }
+
+    public void setUserSeq(Integer userSeq) {
+        this.userSeq = userSeq;
     }
 
     //    @Basic

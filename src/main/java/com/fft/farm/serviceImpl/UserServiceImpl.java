@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findAllUsers(Integer statusSeq) {
-        return null;
+        return  this.userRepository.findByStatus(statusSeq);
     }
 
 

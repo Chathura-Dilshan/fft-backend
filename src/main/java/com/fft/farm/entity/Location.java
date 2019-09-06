@@ -6,13 +6,15 @@ import javax.persistence.*;
 @Entity
 @Table(name = "location")
 @EntityListeners(AuditingEntityListener.class)
-public class Location {
+public class Location extends SharedModel {
 
     private Integer locationSeq;
     private String locationName;
     private String address;
     private String contactNo;
     private String locationType;
+    private Integer userSeq;
+    private User user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,5 +61,23 @@ public class Location {
 
     public void setLocationType(String locationType) {
         this.locationType = locationType;
+    }
+    @Basic
+    @Column(name = "user_seq")
+    public Integer getUserSeq() {
+        return userSeq;
+    }
+
+    public void setUserSeq(Integer userSeq) {
+        this.userSeq = userSeq;
+    }
+    @OneToOne
+    @JoinColumn(name = "user_seq",nullable = false, insertable = false, updatable = false)
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

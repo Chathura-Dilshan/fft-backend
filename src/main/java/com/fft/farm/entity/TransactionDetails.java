@@ -13,18 +13,11 @@ public class TransactionDetails {
     //farm details
     @NotNull
     private Integer farmSeq;
-    @NotNull
-    private Integer foodSeq;
-    @NotNull
-    private Integer fertilizerSeq;
-    @NotNull
-    private Integer pesticideSeq;
     private String note;
     private Date qrGenerateDate;
     // transport details
     private String vehicleNo;
     private String vehicleType;// van,lorry
-    private Integer transporterSeq;
     private Date transporterPickDate;
     private Date transporterDeliveredDate;
     //packing details
@@ -41,9 +34,7 @@ public class TransactionDetails {
 
     private Integer currentStatus;
 
-    private Food food;
-    private Fertilizer fertilizer;
-    private Pesticide pesticide;
+    private Farm farm;
 
 
 
@@ -69,34 +60,7 @@ public class TransactionDetails {
         this.farmSeq = farmSeq;
     }
 
-    @Basic
-    @Column(name = "food_seq")
-    public Integer getFoodSeq() {
-        return foodSeq;
-    }
 
-    public void setFoodSeq(Integer foodSeq) {
-        this.foodSeq = foodSeq;
-    }
-
-    @Basic
-    @Column(name = "fertilizer_seq")
-    public Integer getFertilizerSeq() {
-        return fertilizerSeq;
-    }
-
-    public void setFertilizerSeq(Integer fertilizerSeq) {
-        this.fertilizerSeq = fertilizerSeq;
-    }
-    @Basic
-    @Column(name = "pesticide_seq")
-    public Integer getPesticideSeq() {
-        return pesticideSeq;
-    }
-
-    public void setPesticideSeq(Integer pesticideSeq) {
-        this.pesticideSeq = pesticideSeq;
-    }
     @Basic
     @Column(name = "note")
     public String getNote() {
@@ -133,15 +97,7 @@ public class TransactionDetails {
     public void setVehicleType(String vehicleType) {
         this.vehicleType = vehicleType;
     }
-    @Basic
-    @Column(name = "transporter_seq")
-    public Integer getTransporterSeq() {
-        return transporterSeq;
-    }
 
-    public void setTransporterSeq(Integer transporterSeq) {
-        this.transporterSeq = transporterSeq;
-    }
     @Basic
     @Column(name = "transporter_pick_date")
     public Date getTransporterPickDate() {
@@ -243,30 +199,12 @@ public class TransactionDetails {
         this.currentStatus = currentStatus;
     }
     @OneToOne
-    @JoinColumn(name = "food_seq", insertable = false, updatable = false)
-    public Food getFood() {
-        return food;
+    @JoinColumn(name = "farm_seq",nullable = false, insertable = false, updatable = false)
+    public Farm getFarm() {
+        return farm;
     }
 
-    public void setFood(Food food) {
-        this.food = food;
-    }
-    @OneToOne
-    @JoinColumn(name = "fertilizer_seq", insertable = false, updatable = false)
-    public Fertilizer getFertilizer() {
-        return fertilizer;
-    }
-
-    public void setFertilizer(Fertilizer fertilizer) {
-        this.fertilizer = fertilizer;
-    }
-    @OneToOne
-    @JoinColumn(name = "pesticide_seq", insertable = false, updatable = false)
-    public Pesticide getPesticide() {
-        return pesticide;
-    }
-
-    public void setPesticide(Pesticide pesticide) {
-        this.pesticide = pesticide;
+    public void setFarm(Farm farm) {
+        this.farm = farm;
     }
 }
