@@ -62,8 +62,8 @@ public class UserServiceImpl implements UserService {
                     existRoles = this.roleRepository.findByRoleNameIn(roles);
                     existRoles.ifPresent(rolesSet::addAll);
 
-                } else if (user.getUserType().equals("SYSTEM_USER")) {
-                    user.setUserType("SYSTEM_USER");
+                } else {
+                    user.setUserType(user.getUserType());
                     existRoles = this.roleRepository.findByRoleSeqIn(user.getRolesList());
                     existRoles.ifPresent(rolesSet::addAll);
                 }
@@ -92,6 +92,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUsers(Integer statusSeq) {
         return  this.userRepository.findByStatus(statusSeq);
+    }
+
+    @Override
+    public User findByUsernameAndStatus(String username, Integer statusSeq) {
+        return  this.userRepository.findByUsernameAndStatus(username,statusSeq);
     }
 
 

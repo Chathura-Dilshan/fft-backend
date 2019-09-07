@@ -44,4 +44,10 @@ public class FarmController {
     public List<Farm> findAllFarms() {
         return this.farmService.findAllFarms(MasterDataStatus.APPROVED.getStatusSeq());
     }
+
+    @GetMapping("/findAllFarmsByUserSeq")
+    @PreAuthorize("hasAnyRole('login','farm')")
+    public List<Farm> findAllFarmsByUserSeq() {
+        return this.farmService.findAllFarmsByUserSeq(MasterDataStatus.APPROVED.getStatusSeq());
+    }
 }

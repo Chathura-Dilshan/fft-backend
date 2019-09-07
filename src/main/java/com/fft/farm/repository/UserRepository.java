@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 
     List<User> findByStatus(Integer statusSeq);
+
+    User findByUsernameAndStatus(String username, Integer statusSeq);
 }

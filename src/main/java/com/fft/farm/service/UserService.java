@@ -13,4 +13,7 @@ public interface UserService {
     ResponseEntity<User> deleteUser(Integer userSeq);
 
     List<User> findAllUsers(Integer statusSeq);
+
+
+    User findByUsernameAndStatus(String username, Integer statusSeq);
 }

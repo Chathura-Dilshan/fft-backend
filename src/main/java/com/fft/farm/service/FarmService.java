@@ -13,4 +13,6 @@ public interface FarmService {
     ResponseEntity<Farm> deleteFarm(Integer farmSeq);
 
     List<Farm> findAllFarms(Integer statusSeq);
+
+    List<Farm> findAllFarmsByUserSeq(Integer statusSeq);
 }

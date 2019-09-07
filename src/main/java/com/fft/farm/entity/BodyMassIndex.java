@@ -3,13 +3,18 @@ package com.fft.farm.entity;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+
 @Entity
 @Table(name = "body_mass_index")
 @EntityListeners(AuditingEntityListener.class)
-public class BodyMassIndex extends SharedModel{
+public class BodyMassIndex extends SharedModel {
     private Integer bodyMassIndexSeq;
     private Double height;
     private Double weight;
+    private Integer age;
+    private Double bodyStatus;
+    private String gender;
+    private Double dailyCalories;
     private Integer userSeq;
     private User user;
 
@@ -23,6 +28,7 @@ public class BodyMassIndex extends SharedModel{
     public void setBodyMassIndexSeq(Integer bodyMassIndexSeq) {
         this.bodyMassIndexSeq = bodyMassIndexSeq;
     }
+
     @Basic
     @Column(name = "height", nullable = false, length = 50)
     public Double getHeight() {
@@ -32,6 +38,7 @@ public class BodyMassIndex extends SharedModel{
     public void setHeight(Double height) {
         this.height = height;
     }
+
     @Basic
     @Column(name = "weight", nullable = false, length = 50)
     public Double getWeight() {
@@ -41,6 +48,7 @@ public class BodyMassIndex extends SharedModel{
     public void setWeight(Double weight) {
         this.weight = weight;
     }
+
     @Basic
     @Column(name = "user_seq", nullable = false, length = 50)
     public Integer getUserSeq() {
@@ -50,6 +58,7 @@ public class BodyMassIndex extends SharedModel{
     public void setUserSeq(Integer userSeq) {
         this.userSeq = userSeq;
     }
+
     @OneToOne
     @JoinColumn(name = "user_seq", insertable = false, updatable = false)
     public User getUser() {
@@ -58,5 +67,43 @@ public class BodyMassIndex extends SharedModel{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Basic
+    @Column(name = "age")
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    @Basic
+    @Column(name = "body_status")
+    public Double getBodyStatus() {
+        return bodyStatus;
+    }
+
+    public void setBodyStatus(Double bodyStatus) {
+        this.bodyStatus = bodyStatus;
+    }
+
+    @Transient
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+    @Basic
+    @Column(name = "daily_calories")
+    public Double getDailyCalories() {
+        return dailyCalories;
+    }
+
+    public void setDailyCalories(Double dailyCalories) {
+        this.dailyCalories = dailyCalories;
     }
 }

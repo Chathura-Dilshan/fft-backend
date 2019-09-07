@@ -1,7 +1,9 @@
 package com.fft.farm.serviceImpl;
 
 import com.fft.farm.entity.Farm;
+import com.fft.farm.entity.User;
 import com.fft.farm.repository.FarmRepository;
+import com.fft.farm.repository.UserRepository;
 import com.fft.farm.service.FarmService;
 import com.fft.farm.util.MasterDataStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,14 @@ import java.util.Set;
 public class FarmServiceImpl implements FarmService {
 
     private final FarmRepository farmRepository;
+    private final UserRepository userRepository;
+
 
     @Autowired
-    public FarmServiceImpl(FarmRepository farmRepository) {
+    public FarmServiceImpl(FarmRepository farmRepository,
+                           UserRepository userRepository) {
         this.farmRepository = farmRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -100,5 +106,12 @@ public class FarmServiceImpl implements FarmService {
     @Override
     public List<Farm> findAllFarms(Integer statusSeq) {
         return this.farmRepository.findByStatus(statusSeq);
+    }
+
+    @Override
+    public List<Farm> findAllFarmsByUserSeq(Integer statusSeq) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<User> existUse = this.userRepository.findByUsername(username);
+        return this.farmRepository.findByStatusAndUserSeq(statusSeq,existUse.get().getUserSeq());
     }
 }

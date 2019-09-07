@@ -52,7 +52,11 @@ public class UserController {
         return this.userService.findAllUsers(MasterDataStatus.APPROVED.getStatusSeq());
     }
 
-
+    @PostMapping("/findByUsername")
+    @PreAuthorize("hasAnyRole('login','user')")
+    public User findByUsername(@RequestBody User user) {
+        return this.userService.findByUsernameAndStatus(user.getUsername(),MasterDataStatus.APPROVED.getStatusSeq());
+    }
 
     @GetMapping(produces = "application/json")
     @RequestMapping({"/login"})

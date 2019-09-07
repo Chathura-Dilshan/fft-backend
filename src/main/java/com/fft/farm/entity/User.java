@@ -17,6 +17,7 @@ public class User extends SharedModel {
     private String username;
     private String password;
     private String email;
+    private String gender;
     private String firstName;
     private String secondName;
     private Set<Role> roles;
@@ -37,6 +38,7 @@ public class User extends SharedModel {
         this.password=user.getPassword();
         this.securityAnswer=user.getSecurityAnswer();
         this.userType=user.getUserType();
+        this.gender=user.getGender();
 
     }
 
@@ -140,5 +142,14 @@ public class User extends SharedModel {
 
     public void setRolesList(List<Integer> rolesList) {
         this.rolesList = rolesList;
+    }
+    @Basic
+    @Column(name = "gender")
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
