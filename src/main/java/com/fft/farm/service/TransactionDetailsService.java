@@ -10,6 +10,8 @@ public interface TransactionDetailsService {
 
     ResponseEntity updateTransactionDetails(TransactionDetails transactionDetails);
 
+    TransactionDetails findByTtransactionDetailsSeq(Integer transactionDetailsSeq);
+
 //    ResponseEntity<TransactionDetails> deleteTransactionDetails(Integer transactionDetailsSeq);
 
 //    List<TransactionDetails> findAllTransactionDetailss(Integer statusSeq);

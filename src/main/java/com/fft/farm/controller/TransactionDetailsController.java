@@ -25,7 +25,7 @@ public class TransactionDetailsController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAnyRole('login','transactionDetails')")
+    @PreAuthorize("hasAnyRole('login','createTransactionDetails')")
     public ResponseEntity updateTransactionDetails(@RequestBody TransactionDetails transactionDetails) {
         return this.transactionDetailsService.updateTransactionDetails(transactionDetails);
     }
@@ -42,10 +42,10 @@ public class TransactionDetailsController {
 //        return this.transactionDetailsService.findAllTransactionDetailss(MasterDataStatus.APPROVED.getStatusSeq());
 //    }
 
-//    @GetMapping("{transactionDetailsSeq}")
-//    @PreAuthorize("hasRole('ROLE_config@transactionDetails_VIEW')")
-//    public TransactionDetails findTransactionDetailsByTransactionDetailsSeq(@PathVariable("transactionDetailsSeq") Integer transactionDetailsSeq) {
-//        Optional<TransactionDetails> transactionDetails = this.transactionDetailsRepository.findById(transactionDetailsSeq);
-//        return transactionDetails.orElse(null);
-//    }
+    @GetMapping("{transactionDetailsSeq}")
+    @PreAuthorize("hasRole('createTransactionDetails')")
+    public TransactionDetails findTransactionDetailsByTransactionDetailsSeq(@PathVariable("transactionDetailsSeq") Integer transactionDetailsSeq) {
+        return this.transactionDetailsService.findByTtransactionDetailsSeq(transactionDetailsSeq);
+
+    }
 }

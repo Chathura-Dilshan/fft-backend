@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -81,10 +82,12 @@ public class TransactionDetailsServiceImpl implements TransactionDetailsService 
     @Override
     public ResponseEntity updateTransactionDetails(TransactionDetails transactionDetails) {
         Optional<TransactionDetails> dbTransactionDetails = this.transactionDetailsRepository.findById(transactionDetails.getTransactionDetailsSeq());
+
         ResponseEntity responseEntity;
         if (dbTransactionDetails.isPresent()) {
             if (dbTransactionDetails.get().equals(transactionDetails)) {
-                responseEntity = new ResponseEntity<>(transactionDetails, HttpStatus.NOT_MODIFIED);
+                String errorMessage = "h";
+                responseEntity = new ResponseEntity<>(errorMessage, HttpStatus.NOT_MODIFIED);
             } else {
                 Set<ConstraintViolation<TransactionDetails>> errors = Validation.buildDefaultValidatorFactory().
                         getValidator().validate(transactionDetails);
@@ -92,6 +95,7 @@ public class TransactionDetailsServiceImpl implements TransactionDetailsService 
 //                    String errorMessage = ErrorMessageCreator.errorsInRow((HashSet<?>) errors);
                     responseEntity = new ResponseEntity<>("TransactionDetails already exist", HttpStatus.BAD_REQUEST);
                 } else {
+
                     transactionDetails = this.transactionDetailsRepository.save(transactionDetails);
                     responseEntity = new ResponseEntity<>(transactionDetails, HttpStatus.CREATED);
                 }
@@ -100,6 +104,12 @@ public class TransactionDetailsServiceImpl implements TransactionDetailsService 
             responseEntity = new ResponseEntity<>(transactionDetails, HttpStatus.NOT_FOUND);
         }
         return responseEntity;
+    }
+
+    @Override
+    public TransactionDetails findByTtransactionDetailsSeq(Integer transactionDetailsSeq) {
+        Optional<TransactionDetails> transactionDetails=this.transactionDetailsRepository.findByTransactionDetailsSeq(transactionDetailsSeq);
+        return transactionDetails.get();
     }
 
 //    @Override
