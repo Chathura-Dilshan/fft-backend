@@ -1,7 +1,9 @@
 package com.fft.farm.serviceImpl;
 
 import com.fft.farm.entity.Location;
+import com.fft.farm.entity.User;
 import com.fft.farm.repository.LocationRepository;
+import com.fft.farm.repository.UserRepository;
 import com.fft.farm.service.LocationService;
 import com.fft.farm.util.MasterDataStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +15,20 @@ import org.springframework.stereotype.Service;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 @Service
 public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository locationRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public LocationServiceImpl(LocationRepository locationRepository) {
+    public LocationServiceImpl(LocationRepository locationRepository,
+                               UserRepository userRepository) {
         this.locationRepository = locationRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -55,5 +61,12 @@ public class LocationServiceImpl implements LocationService {
 
         }
         return responseEntity;
+    }
+
+    @Override
+    public List<Location> findAllLocationsByUserSeq(Integer statusSeq) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<User> existUse = this.userRepository.findByUsername(username);
+        return this.locationRepository.findByStatusAndUserSeq(statusSeq,existUse.get().getUserSeq());
     }
 }

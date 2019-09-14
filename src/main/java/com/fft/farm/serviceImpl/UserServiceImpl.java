@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService {
                     roles.add("login");
                     roles.add("dashboard");
                     roles.add("bodyMassIndex");
+                    roles.add("createBodyMassIndex");
                     existRoles = this.roleRepository.findByRoleNameIn(roles);
                     existRoles.ifPresent(rolesSet::addAll);
 

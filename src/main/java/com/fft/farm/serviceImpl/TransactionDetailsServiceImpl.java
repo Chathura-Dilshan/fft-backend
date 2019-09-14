@@ -86,7 +86,7 @@ public class TransactionDetailsServiceImpl implements TransactionDetailsService 
         ResponseEntity responseEntity;
         if (dbTransactionDetails.isPresent()) {
             if (dbTransactionDetails.get().equals(transactionDetails)) {
-                String errorMessage = "h";
+                String errorMessage = "TransactionDetails already exist";
                 responseEntity = new ResponseEntity<>(errorMessage, HttpStatus.NOT_MODIFIED);
             } else {
                 Set<ConstraintViolation<TransactionDetails>> errors = Validation.buildDefaultValidatorFactory().
