@@ -22,6 +22,7 @@ import java.util.Set;
 
 import static jdk.nashorn.internal.objects.NativeMath.round;
 
+@SuppressWarnings("Duplicates")
 @Service
 public class BodyMassIndexServiceImpl implements BodyMassIndexService {
     private final BodyMassIndexRepository bodyMassIndexRepository;

@@ -31,7 +31,7 @@ public class LocationController {
     }
 
     @GetMapping("/findAllLocationsByUserSeq")
-    @PreAuthorize("hasAnyRole('login','location')")
+    @PreAuthorize("hasAnyRole('login','createLocation')")
     public List<Location> findAllLocationsByUserSeq() {
         return this.locationService.findAllLocationsByUserSeq(MasterDataStatus.APPROVED.getStatusSeq());
     }
