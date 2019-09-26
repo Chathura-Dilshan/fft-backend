@@ -43,7 +43,7 @@ public class TransactionDetailsController {
 //    }
 
     @GetMapping("{transactionDetailsSeq}")
-    @PreAuthorize("hasRole('createTransactionDetails')")
+    @PreAuthorize("hasAnyRole('login','createTransactionDetails')")
     public TransactionDetails findTransactionDetailsByTransactionDetailsSeq(@PathVariable("transactionDetailsSeq") Integer transactionDetailsSeq) {
         return this.transactionDetailsService.findByTtransactionDetailsSeq(transactionDetailsSeq);
 

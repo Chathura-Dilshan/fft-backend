@@ -15,4 +15,6 @@ public interface FarmRepository extends JpaRepository<Farm, Integer> {
 //    List<Food> findByUserSeqAndStatus(Integer userSeq, Integer statusSeq);
 
     List<Farm> findByStatusAndUserSeq(Integer statusSeq, Integer userSeq);
+
+    Farm findByStatusAndFarmSeq(Integer statusSeq, Integer farmSeq);
 }

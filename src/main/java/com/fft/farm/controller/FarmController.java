@@ -39,6 +39,12 @@ public class FarmController {
         return this.farmService.deleteFarm(farmSeq);
     }
 
+    @GetMapping("find/{farmSeq}")
+    @PreAuthorize("hasAnyRole('login','farm','createTransactionDetails')")
+    public Farm getFarmByFarmSeq(@PathVariable("farmSeq") Integer farmSeq) {
+        return this.farmService.findByFarmSeqAndStatus(farmSeq,MasterDataStatus.APPROVED.getStatusSeq());
+    }
+
     @GetMapping
     @PreAuthorize("hasAnyRole('login','farm')")
     public List<Farm> findAllFarms() {

@@ -114,4 +114,9 @@ public class FarmServiceImpl implements FarmService {
         Optional<User> existUse = this.userRepository.findByUsername(username);
         return this.farmRepository.findByStatusAndUserSeq(statusSeq,existUse.get().getUserSeq());
     }
+
+    @Override
+    public Farm findByFarmSeqAndStatus(Integer farmSeq, Integer statusSeq) {
+        return  this.farmRepository.findByStatusAndFarmSeq(statusSeq,farmSeq);
+    }
 }

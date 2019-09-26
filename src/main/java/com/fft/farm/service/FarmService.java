@@ -15,4 +15,6 @@ public interface FarmService {
     List<Farm> findAllFarms(Integer statusSeq);
 
     List<Farm> findAllFarmsByUserSeq(Integer statusSeq);
+
+    Farm findByFarmSeqAndStatus(Integer farmSeq, Integer statusSeq);
 }
